@@ -1,0 +1,36 @@
+fix = true
+line-length = 88
+indent-width = 4
+target-version = "py310"
+
+[format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+docstring-code-format = true
+docstring-code-line-length = "dynamic"
+
+[lint]
+fixable = ["ALL"]
+unfixable = []
+extend-select = [
+    "E", "W", "C90", "I", "N", "D", "UP", "YTT", "ASYNC", "S", "BLE", "FBT",
+    "B", "A", "COM", "C4", "DTZ", "T10", "DJ", "EM", "EXE", "FA", "ISC", "ICN",
+    "LOG", "G", "INP", "PIE", "PYI", "PT", "Q", "RSE", "RET", "SLF", "SLOT",
+    "SIM", "TID", "TC", "INT", "ARG", "PTH", "TD", "FIX", "PD", "PGH", "PL",
+    "TRY", "FLY", "NPY", "FAST", "AIR", "PERF", "FURB", "RUF",
+]
+ignore = [
+    "E501", "D1", "FBT003", "D203", "D212", "D401", "S311",
+    "PERF401", "RET504", "FA102", "TRY003", "EM101", "ARG002",
+
+    "TD003", "PLR0913", "C901", "TD002", "SLF001", "PD002",
+    "PLR2004", "PLR0912", "PLR0915", "S301", "PLC0415", "PLR0911",
+]
+
+
+[lint.per-file-ignores]
+"*.ipynb" = ["S310", "N803", "F401", ]
+"tests/*" = ["INP001", "S101", "PLC0415", "F841", "N803", "ARG001", "ARG002", "N806", ]
+"docs/*" = ["INP001", "A001", "PTH100", ]
+"**/__init__.py" = ["I", "F401", "F841", ]

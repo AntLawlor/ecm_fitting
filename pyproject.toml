@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ecm_fitting"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "scipy",
+    "lmfit",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["ecm_fitting*"]
