@@ -8,9 +8,11 @@ from scipy.sparse import csr_matrix
 
 from ecm_fitting.config import _current_sign
 
+
 if TYPE_CHECKING:
     from numpy.typing import NDArray
-
+    
+    from ecm_fitting.fitting.local_fitter import ParameterSet
     from ecm_fitting.data.segment import DataSegment
     from ecm_fitting.ecm.model import ECM
     from ecm_fitting.ecm.surface import ParameterSurface
@@ -78,7 +80,7 @@ class ECMSimulator:
     def simulate(
         self,
         segment: DataSegment,
-        surface: ParameterSurface,
+        parameters: ParameterSet | ParameterSurface,
         *,
         compute_jacobian: bool = True,
         compute_components: bool = False,
@@ -92,8 +94,8 @@ class ECMSimulator:
         Args:
             segment (DataSegment):
                 The data segment to simulate.
-            surface (ParameterSurface):
-                Parameter surface used to interpolate ECM parameters theta_i(z(t))
+            parameters (ParameterSet | ParameterSurface):
+                Parameter set/surface used to interpolate ECM parameters theta_i(z(t))
                 at each timestep.
             compute_jacobian (bool):
                 When True, compute d(v_sim)/d(params) at each timestep via the
@@ -152,7 +154,7 @@ class ECMSimulator:
             }
 
             # 3. Interpolate parameter surface
-            params = surface.at(soc=soc, **cond)
+            params = parameters.at(soc=soc, **cond)
             current = sign * float(segment.current[k])
             v_oc = float(segment.ocv_func(soc))
 
